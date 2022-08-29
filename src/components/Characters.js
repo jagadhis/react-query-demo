@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import {useQuery} from "react-query";
 
 function Characters() {
     const [characters, setCharacters] = useState([])
