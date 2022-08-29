@@ -45,7 +45,9 @@ function Characters() {
         <div>
             {data?.results?.map((character) => {
                 return (
-                    <div>{character.name}</div>
+                    <div>
+                        <p>{character.id}</p>
+                    </div>
                 )
             }
 
