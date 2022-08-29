@@ -1,21 +1,35 @@
 import React from 'react'
 import {useQuery} from "react-query";
-
+import axios from 'axios'
 //Commented Code Fetched Without Using React-Query
 
 function Characters() {
 
     // const [characters, setCharacters] = useState([])
-    const fetchCharacters = async () => {
-        const response = await fetch("https://rickandmortyapi.com/api/character")
-     return response.json();
-        //console.log(data);
-        // setCharacters(data.results)
-    }
+    // const fetchCharacters = async () => {
+    //     const response = await fetch("https://rickandmortyapi.com/api/character")
+    //         return response.json();
+    //     //console.log(data);
+    //     // setCharacters(data.results)
+    // }
+    // const fetchCharacters = async() => {
+    //             await new Promise(resolve => setTimeout(resolve,1000))
+    //             return axios
+    //             .get('https://rickandmortyapi.com/api/character')
+    //             .then(res => res.data.results)
+    //           }
+        
+    
 
-    const {data,status} = useQuery("characters",fetchCharacters)
+    const {data,status} = useQuery("characters", async() => {
+        await new Promise(resolve => setTimeout(resolve,1000))
+        return axios
+        .get('https://rickandmortyapi.com/api/character')
+        .then(res => res.data.results)
+      });
    
-
+console.log(data)
+console.log(status)
     // useEffect(() => {
     //     fetchCharacters();
     // }, [])
@@ -29,7 +43,7 @@ function Characters() {
     }
     return (
        <div>
-      {data.results.map((character)=>{
+            {data.results?.map((character)=>{
         return (
             <div>{character.name}</div>
         )
