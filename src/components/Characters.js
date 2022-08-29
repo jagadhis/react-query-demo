@@ -43,17 +43,19 @@ function Characters() {
     }
     return (
         <div>
-            {data?.results?.map((character) => {
+            {data?.results?.map(data => {
                 return (
                     <div>
-                        <p>{character.id}</p>
+                        <h1>{data.id}</h1>
+                        <h1>Hello</h1>
+                        
                     </div>
                 )
             }
           
 
             )}
-  
+
         </div>
     )
 }
