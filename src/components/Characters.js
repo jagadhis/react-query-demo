@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
-function Character() {
+function Characters() {
     const [characters, setCharacters] = useState([])
     const fetchCharacters = async () => {
         const response = await fetch("https://rickandmortyapi.com/api/character")
@@ -13,8 +13,12 @@ function Character() {
         fetchCharacters();
     }, [])
     return (
-        <div>Character</div>
+        <div>
+            {characters.results.map((character)=>(
+                <div>{character.name}</div>
+            ))}
+        </div>
     )
 }
 
-export default Character
+export default Characters;
