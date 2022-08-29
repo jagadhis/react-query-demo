@@ -50,9 +50,10 @@ function Characters() {
                     </div>
                 )
             }
+          
 
             )}
-
+  
         </div>
     )
 }
