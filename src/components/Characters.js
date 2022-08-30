@@ -21,7 +21,7 @@ function Characters() {
     //             .then(res => res.data.results)
     //           }
 
-const [page,setPage] = useState(4);
+const [page,setPage] = useState(40);
     const fetchCharacters = async ({queryKey}) => {
         await new Promise(resolve => setTimeout(resolve, 1000))
         return axios
@@ -30,7 +30,9 @@ const [page,setPage] = useState(4);
     };
 
 
-    const { data, status } = useQuery(["characters",page], fetchCharacters);
+    const { data, status,isPreviousData,isLoading,isError } = useQuery(["characters",page], fetchCharacters,{
+        keepPreviousData:true,
+});
 
     console.log(data)
     console.log(status)
@@ -38,11 +40,11 @@ const [page,setPage] = useState(4);
     //     fetchCharacters();
     // }, [])
 
-    if (status === "Loading") {
+    if (isLoading) {
         return <div>Loading...</div>
     }
 
-    if (status === "error") {
+    if (isError) {
         return <div>Error</div>
     }
     return (
@@ -59,8 +61,8 @@ const [page,setPage] = useState(4);
 
             )}
             <div>
-                <button disabled={page===1} onClick={() => setPage((old)=>old-1)}>Previous</button>
-                <button>Next</button>
+                <button disabled={page===1} onClick={() => setPage((old) => old-1)}>Previous</button>
+                <button disabled={!data?.next} onClick={() => setPage((old)=>old+1)}>Next</button>
             </div>
 
         </div>
