@@ -58,6 +58,10 @@ const [page,setPage] = useState(4);
           
 
             )}
+            <div>
+                <button disables={page===1} onClick={() => setPage((old)=>old-1)}>Previous</button>
+                <button>Next</button>
+            </div>
 
         </div>
     )
