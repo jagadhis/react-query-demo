@@ -62,7 +62,7 @@ const [page,setPage] = useState(40);
             )}
             <div>
                 <button disabled={page===1} onClick={() => setPage((old) => old-1)}>Previous</button>
-                <button disabled={!data?.next} onClick={() => setPage((old)=>old+1)}>Next</button>
+                <button disabled={page === 40} onClick={() => setPage((old)=>old+1)}>Next</button>
             </div>
 
         </div>
