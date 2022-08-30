@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React, { useState } from 'react'
 import { useQuery } from "react-query";
 import axios from 'axios'
 import Character from './Character';
@@ -21,8 +21,8 @@ function Characters() {
     //             .then(res => res.data.results)
     //           }
 
-const [page,setPage] = useState(40);
-    const fetchCharacters = async ({queryKey}) => {
+    const [page, setPage] = useState(40);
+    const fetchCharacters = async ({ queryKey }) => {
         await new Promise(resolve => setTimeout(resolve, 1000))
         return axios
             .get(`https://rickandmortyapi.com/api/character?page=${queryKey[1]}`)
@@ -30,12 +30,12 @@ const [page,setPage] = useState(40);
     };
 
 
-    const { data, status,isPreviousData,isLoading,isError } = useQuery(["characters",page], fetchCharacters,{
-        keepPreviousData:true,
-});
+    const { data, status, isPreviousData, isLoading, isError } = useQuery(["characters", page], fetchCharacters, {
+        keepPreviousData: true,
+    });
 
     console.log(data)
-    console.log(status)
+    console.log(isPreviousData)
     // useEffect(() => {
     //     fetchCharacters();
     // }, [])
@@ -52,17 +52,17 @@ const [page,setPage] = useState(40);
             {data?.map(data => {
                 return (
                     <div >
-                    <Character character={data} />
-                        
+                        <Character character={data} />
+
                     </div>
                 )
             }
-          
+
 
             )}
             <div>
-                <button disabled={page===1} onClick={() => setPage((old) => old-1)}>Previous</button>
-                <button disabled={page === 40} onClick={() => setPage((old)=>old+1)}>Next</button>
+                <button disabled={page === 1} onClick={() => setPage((old) => old - 1)}>Previous</button>
+                <button disabled={page === 40} onClick={() => setPage((old) => old + 1)}>Next</button>
             </div>
 
         </div>
