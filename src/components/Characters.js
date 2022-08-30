@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useState} from 'react'
 import { useQuery } from "react-query";
 import axios from 'axios'
 import Character from './Character';
@@ -21,14 +21,16 @@ function Characters() {
     //             .then(res => res.data.results)
     //           }
 
-
-
-    const { data, status } = useQuery("characters", async () => {
+const [page,setPage] = useState(4);
+    const fetchCharacters = async ({queryKey}) => {
         await new Promise(resolve => setTimeout(resolve, 1000))
         return axios
-            .get('https://rickandmortyapi.com/api/character')
+            .get(`https://rickandmortyapi.com/api/character?page=${queryKey[1]}`)
             .then(res => res.data.results)
-    });
+    };
+
+
+    const { data, status } = useQuery(["characters",page], fetchCharacters);
 
     console.log(data)
     console.log(status)
@@ -44,10 +46,10 @@ function Characters() {
         return <div>Error</div>
     }
     return (
-        <div>
+        <div className="characters">
             {data?.map(data => {
                 return (
-                    <div>
+                    <div >
                     <Character character={data} />
                         
                     </div>
