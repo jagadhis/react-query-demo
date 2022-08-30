@@ -46,7 +46,7 @@ const [page,setPage] = useState(4);
         return <div>Error</div>
     }
     return (
-        <div className="characters">
+        <div>
             {data?.map(data => {
                 return (
                     <div >
@@ -59,7 +59,7 @@ const [page,setPage] = useState(4);
 
             )}
             <div>
-                <button disables={page===1} onClick={() => setPage((old)=>old-1)}>Previous</button>
+                <button disabled={page===1} onClick={() => setPage((old)=>old-1)}>Previous</button>
                 <button>Next</button>
             </div>
 
