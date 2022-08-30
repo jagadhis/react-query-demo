@@ -1,6 +1,7 @@
 import React from 'react'
 import { useQuery } from "react-query";
 import axios from 'axios'
+import Character from './Character';
 //Commented Code Fetched Without Using React-Query
 
 function Characters() {
@@ -43,11 +44,10 @@ function Characters() {
     }
     return (
         <div>
-            {data?.results?.map(data => {
+            {data?.map(data => {
                 return (
                     <div>
-                        <h1>{data.id}</h1>
-                        <h1>Hello</h1>
+                    <Character character={data} />
                         
                     </div>
                 )
